@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import GroceryLogos from "/img/Grocery_Logos.png";
 
 function LoginForm() {
   const [loginData, setLoginData] = useState({
@@ -56,15 +57,22 @@ function LoginForm() {
 
   return (
     <div className="bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 min-h-screen flex flex-col items-center justify-center">
-      <div className="font-inter text-white text-center">
-        <h1
-          className="font-bold text-4xl md:text-5xl mb-4"
-          style={{ fontSize: "45px", fontFamily: "Inter" }}
-        >
-          Mini Grocery
-        </h1>
+      <div className="font-inter text-white text-center mb-16">
+        <div className="flex flex-col items-center justify-center mb-4">
+          <img
+            src={GroceryLogos}
+            alt="Logo"
+            /* Use the opacity utility class */
+          />
+          <h1
+            className="font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+            style={{ fontSize: "45px", fontFamily: "Inter" }}
+          >
+            Mini Grocery
+          </h1>
+        </div>
         <h2
-          className="text-xl md:text-2xl font-semibold mb-4"
+          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold mb-4"
           style={{ fontSize: "30px", fontFamily: "Inter" }}
         >
           Inventory Management System
@@ -97,7 +105,7 @@ function LoginForm() {
           <div>
             <button
               type="submit"
-              className="bg-white text-black rounded-full w-40 h-12 text-xs md:text-base mt-5"
+              className="bg-white text-black rounded-full w-40 sm:w-48 md:w-60 lg:w-72 xl:w-80 h-12 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-5"
               style={{ fontFamily: "Inter", fontSize: "20px" }}
             >
               Login
