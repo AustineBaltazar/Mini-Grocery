@@ -14,7 +14,6 @@ function LoginForm() {
 
     const { email, password } = loginData;
 
-    // Replace this with your real authentication logic
     const fakeUsers = [
       {
         email: "user@gmail.com",
@@ -33,12 +32,11 @@ function LoginForm() {
     );
 
     if (user) {
-      // Store the user object in local storage
       localStorage.setItem("user", JSON.stringify(user));
 
       // Redirect based on user type
       if (user.userType === "user") {
-        window.location.href = "/home"; // Redirect to user homepage
+        window.location.href = "/user"; // Redirect to user homepage
       } else if (user.userType === "admin") {
         window.location.href = "/admin"; // Redirect to admin page
       }
@@ -59,11 +57,7 @@ function LoginForm() {
     <div className="bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 min-h-screen flex flex-col items-center justify-center">
       <div className="font-inter text-white text-center mb-16">
         <div className="flex flex-col items-center justify-center mb-4">
-          <img
-            src={GroceryLogos}
-            alt="Logo"
-            /* Use the opacity utility class */
-          />
+          <img src={GroceryLogos} alt="Logo" />
           <h1
             className="font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             style={{ fontSize: "45px", fontFamily: "Inter" }}
