@@ -1,3 +1,7 @@
 export default function UserReport() {
-  return <div>UserReport</div>;
+  return (
+    <div className="flex-grow p-4 flex items-center justify-center">
+      UserReport
+    </div>
+  );
 }

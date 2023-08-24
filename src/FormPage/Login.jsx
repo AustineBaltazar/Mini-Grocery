@@ -54,7 +54,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-b from-sky-700 via-sky-800 bg-sky-800 min-h-screen flex flex-col items-center justify-center">
       <div className="font-inter text-white text-center mb-16">
         <div className="flex flex-col items-center justify-center mb-4">
           <img src={GroceryLogos} alt="Logo" />
