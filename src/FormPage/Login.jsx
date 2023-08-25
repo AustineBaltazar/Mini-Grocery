@@ -34,11 +34,10 @@ function LoginForm() {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
 
-      // Redirect based on user type
       if (user.userType === "user") {
-        window.location.href = "/user"; // Redirect to user homepage
+        window.location.href = "/user";
       } else if (user.userType === "admin") {
-        window.location.href = "/admin"; // Redirect to admin page
+        window.location.href = "/admin";
       }
     } else {
       setError("Invalid credentials");
@@ -109,7 +108,6 @@ function LoginForm() {
             {error && <div className="text-red-500">{error}</div>}
           </div>
           <div className="mt-4">
-            {/* Use the Link component to navigate to the registration page */}
             <Link to="/" className="text-white">
               Don't have an account? Register
             </Link>
