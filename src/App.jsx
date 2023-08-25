@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom"; // Import BrowserRouter and Routes
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegistrationForm from "./FormPage/Register";
 import LoginForm from "./FormPage/Login";
 import AdminLayout from "./AdminLayout/AdminLayout";
@@ -17,6 +16,21 @@ import UserStock from "./UserPage/UserStock";
 import UserSetting from "./UserPage/UserSetting";
 
 function App() {
+  const monthlySalesData = "Monthly sales data here";
+  const todaysReportData = "Today's report data here";
+  const gridData = [
+    { label: "TOTAL CUSTOMER" },
+    { label: "TOTAL SUPPLIER" },
+    { label: "TOTAL PRODUCT" },
+    { label: "ADD PRODUCT" },
+    { label: "SALES REPORT" },
+    { label: "STACK REPORT" },
+    { label: "PURCHASE REPORT" },
+    { label: "TODAY'S REPORT" },
+  ];
+
+  const stockItems = ["ITEM 1", "ITEM 2", "ITEM 3", "ITEM 4"];
+
   return (
     <BrowserRouter>
       <Routes>
@@ -26,8 +40,19 @@ function App() {
         <Route path="admin" element={<AdminLayout />}>
           <Route path="supplier" element={<Supplier />} />
           <Route path="staff" element={<Staff />} />
-          <Route path="report" element={<Report />} />
-          <Route path="stock" element={<Stock />} />
+
+          <Route
+            path="report"
+            element={
+              <Report
+                monthlySales={monthlySalesData}
+                todaysReport={todaysReportData}
+                data={gridData}
+              />
+            }
+          />
+
+          <Route path="stock" element={<Stock stockItems={stockItems} />} />
           <Route path="role" element={<Role />} />
           <Route path="setting" element={<Setting />} />
         </Route>

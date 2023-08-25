@@ -17,7 +17,6 @@ function Admin() {
 
       <div className="mt-4 flex justify-center items-center">
         <div className="bg-white rounded-lg shadow-md p-8 text-2xl font-bold px-100 py-72 mt-8 ml-48">
-          {/* Content for the big container */}
           SUPPLIER INFO HERE
         </div>
       </div>

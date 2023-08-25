@@ -1,6 +1,21 @@
 import React from "react";
 
 function Staff() {
+  const items = [
+    "Partnership Data",
+    "Time in Business",
+    "Product Offered",
+    "Contacts",
+    "Schedule",
+    "Permission Level",
+  ];
+
+  const itemElements = items.map((item, index) => (
+    <h1 key={index} className="pt-4 text-center">
+      {item}
+    </h1>
+  ));
+
   return (
     <div className="p-4 flex flex-col items-center min-h-screen bg-gray-200">
       <header className="bg-white w-full max-w-screen-4xl p-4 ml-8 rounded-lg mt-7 shadow-md">
@@ -26,12 +41,7 @@ function Staff() {
         </div>
 
         <div className="mt-4 grid grid-rows-2 grid-cols-3 gap-6 font-bold">
-          <div className="pt-4 text-center">Partnership Data</div>
-          <div className="pt-4 text-center">Time in Business</div>
-          <div className="pt-4 text-center">Product Offered</div>
-          <div className="pt-4 text-center">Contacts</div>
-          <div className="pt-4 text-center">Schedule</div>
-          <div className="pt-4 text-center">Permission Level</div>
+          {itemElements}
         </div>
       </div>
     </div>

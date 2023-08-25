@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Stock() {
+export default function Stock({ stockItems }) {
   return (
     <div className="p-4 flex flex-col items-center min-h-screen bg-gray-200">
       <div className="flex flex-row justify-between w-full mt-7">
@@ -16,19 +16,15 @@ export default function Stock() {
         </div>
       </div>
 
-      <div className=" grid grid-cols-1 gap-12 mt-20">
-        <div className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14">
-          ITEM 1
-        </div>
-        <div className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14">
-          ITEM 2
-        </div>
-        <div className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14">
-          ITEM 3
-        </div>
-        <div className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14">
-          ITEM 4
-        </div>
+      <div className="grid grid-cols-1 gap-12 mt-20">
+        {stockItems.map((item, index) => (
+          <div
+            key={index}
+            className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14"
+          >
+            {item}
+          </div>
+        ))}
       </div>
     </div>
   );
