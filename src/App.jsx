@@ -40,7 +40,6 @@ function App() {
         <Route path="admin" element={<AdminLayout />}>
           <Route path="supplier" element={<Supplier />} />
           <Route path="staff" element={<Staff />} />
-
           <Route
             path="report"
             element={
@@ -51,7 +50,6 @@ function App() {
               />
             }
           />
-
           <Route path="stock" element={<Stock stockItems={stockItems} />} />
           <Route path="role" element={<Role />} />
           <Route path="setting" element={<Setting />} />

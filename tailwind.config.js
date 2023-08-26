@@ -10,6 +10,7 @@ export default {
       margin: {
         192: "80rem",
         180: "60rem",
+        74: "20.3rem",
       },
     },
   },

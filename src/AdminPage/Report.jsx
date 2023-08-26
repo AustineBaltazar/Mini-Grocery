@@ -11,10 +11,10 @@ function Report({ monthlySales, todaysReport, data }) {
 
       <div className="mt-14 ml-44">
         <div className="grid grid-cols-2 gap-32">
-          <div className="bg-white rounded-lg shadow-xl px-80 py-44">
+          <div className="bg-white rounded-lg shadow-xl px-80 py-44 font-bold">
             {monthlySales}
           </div>
-          <div className="bg-white rounded-lg shadow-xl px-80 py-44">
+          <div className="bg-white rounded-lg shadow-xl px-80 py-44 font-bold">
             {todaysReport}
           </div>
         </div>
@@ -23,7 +23,7 @@ function Report({ monthlySales, todaysReport, data }) {
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-xl px-12 py-12"
+              className="bg-white rounded-lg shadow-xl font-bold px-12 py-12"
             >
               {item.label}
             </div>

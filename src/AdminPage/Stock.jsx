@@ -4,7 +4,7 @@ export default function Stock({ stockItems }) {
   return (
     <div className="p-4 flex flex-col items-center min-h-screen bg-gray-200">
       <div className="flex flex-row justify-between w-full mt-7">
-        <div className="bg-white w-63 p-4 rounded-lg shadow-md ml-72">
+        <div className="bg-white w-63 p-4 rounded-lg shadow-md ml-74">
           <h1 className="text-xl font-bold" style={{ fontFamily: "Inter" }}>
             ADD STOCK
           </h1>
@@ -20,7 +20,7 @@ export default function Stock({ stockItems }) {
         {stockItems.map((item, index) => (
           <div
             key={index}
-            className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14"
+            className="bg-white p-4 rounded-lg ml-40 shadow-md px-192 py-14 font-bold"
           >
             {item}
           </div>

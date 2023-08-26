@@ -30,7 +30,7 @@ function Staff() {
           <img
             src={Pic}
             alt="Profile"
-            className="w-32 h-32 rounded-full shadow-lg"
+            className="w-32 h-32 rounded-lg shadow-lg"
           />
 
           <div className="mt-4 text-left pl-16">
