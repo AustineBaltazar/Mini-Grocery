@@ -35,9 +35,9 @@ function LoginForm() {
       localStorage.setItem("user", JSON.stringify(user));
 
       if (user.userType === "user") {
-        window.location.href = "/user";
+        window.location.href = "/user/pos";
       } else if (user.userType === "admin") {
-        window.location.href = "/admin";
+        window.location.href = "/admin/report";
       }
     } else {
       setError("Invalid credentials");

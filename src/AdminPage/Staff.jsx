@@ -1,4 +1,5 @@
 import React from "react";
+import Pic from "/img/profile-pic-removebg-preview.png";
 
 function Staff() {
   const items = [
@@ -27,7 +28,7 @@ function Staff() {
       <div className="mt-24 mr-180">
         <div className="flex flex-row items-center">
           <img
-            src="url_to_your_profile_picture.jpg"
+            src={Pic}
             alt="Profile"
             className="w-32 h-32 rounded-full shadow-lg"
           />

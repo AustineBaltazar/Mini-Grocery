@@ -12,7 +12,7 @@ function RegistrationForm() {
 
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false); // Track form validity
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (formData.password !== formData.confirmPassword) {
