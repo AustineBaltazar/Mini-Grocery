@@ -11,7 +11,7 @@ export default function NavAdmin() {
     <div className="bg-sky-800 w-1/7 h-screen flex flex-col">
       <div className="flex flex-col items-center justify-start p-4">
         <img src={Logo} alt="logo" className="w-2/4 mb-4" />
-        <h1 className="text-white text-2xl font-bold">ADMIN USER</h1>
+        <h1 className="text-white text-2xl font-bold">ADMIN</h1>
       </div>
 
       <nav className="flex flex-col items-center text-white text-xl font-semibold">

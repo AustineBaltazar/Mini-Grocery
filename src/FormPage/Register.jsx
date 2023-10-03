@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GroceryLogos from "/img/Grocery_Logos.png";
+import axios from "axios";
 
 function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -11,18 +12,7 @@ function RegistrationForm() {
   });
 
   const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false); // Track form validity
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (formData.password !== formData.confirmPassword) {
-      setErrors({ confirmPassword: "" });
-      setIsFormValid(false);
-    } else {
-      setErrors({});
-      setIsFormValid(!!formData.email && !!formData.password);
-    }
-  }, [formData.password, formData.confirmPassword, formData.email]);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,31 +22,44 @@ function RegistrationForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password || !formData.confirmPassword) {
-      setErrors({
-        ...errors,
-        email: !formData.email ? "Email is required" : "",
-        password: !formData.password ? "Password is required" : "",
-        confirmPassword: !formData.confirmPassword
-          ? "Confirm Password is required"
-          : "",
-      });
-      setIsFormValid(false);
-      return;
+
+    // Perform form validation here (e.g., check if fields are not empty, passwords match, etc.)
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        // Make an HTTP POST request to your API to register the user
+        const response = await axios.post(
+          "http://localhost:3000/auth/signup",
+          formData
+        );
+
+        console.log("Registration successful:", response.data);
+
+        // Redirect to the login page or show a success message as needed
+      } catch (error) {
+        // Handle API request errors (e.g., display an error message)
+        console.error("Registration error:", error);
+      }
     }
-
-    console.log("Registration data:", formData);
-
-    setIsSubmitted(true);
   };
 
-  useEffect(() => {
-    if (isSubmitted && isFormValid) {
-      window.location.href = `/login?userType=${formData.userType}`;
+  // Form validation function (customize this based on your requirements)
+  const validateForm = (formData) => {
+    const errors = {};
+
+    // Example: Check if email is empty
+    if (!formData.email) {
+      errors.email = "Email is required";
     }
-  }, [isSubmitted, isFormValid, formData.userType]);
+
+    // Add more validation rules as needed (e.g., check password strength, etc.)
+
+    return errors;
+  };
 
   return (
     <div className="bg-gradient-to-b from-sky-700 via-sky-800 bg-sky-800 min-h-screen flex flex-col items-center justify-center">
@@ -158,15 +161,13 @@ function RegistrationForm() {
             </div>
           </div>
           <div>
-            {isFormValid && (
-              <button
-                type="submit"
-                className="bg-white text-black rounded-full w-40 sm:w-48 md:w-60 lg:w-72 xl:w-80 h-12 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-5"
-                style={{ fontFamily: "Inter", fontSize: "20px" }}
-              >
-                Sign up
-              </button>
-            )}
+            <button
+              type="submit"
+              className="bg-white text-black rounded-full w-40 sm:w-48 md:w-60 lg:w-72 xl:w-80 h-12 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-5"
+              style={{ fontFamily: "Inter", fontSize: "20px" }}
+            >
+              Sign up
+            </button>
           </div>
           <div className="mt-4">
             {errors.confirmPassword && (

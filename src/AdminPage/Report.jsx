@@ -1,24 +1,12 @@
 import React from "react";
 
-function Report({ monthlySales, todaysReport, data }) {
+function Report() {
   return (
-    <div>
-      <header>
-        <h1>DASHBOARD</h1>
+    <div className="flex flex-col h-screen w-screen">
+      <header className="bg-white p-4 border-b border-gray-300 mt-8 shadow-xl">
+        <h1 className="text-2xl font-bold text-black ml-8">Dashboard</h1>
       </header>
-
-      <div>
-        <div>
-          <div>{monthlySales}</div>
-          <div>{todaysReport}</div>
-        </div>
-
-        <div>
-          {data.map((item, index) => (
-            <div key={index}>{item.label}</div>
-          ))}
-        </div>
-      </div>
+      {/* Rest of your component content goes here */}
     </div>
   );
 }

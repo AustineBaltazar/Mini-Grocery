@@ -3,11 +3,11 @@ import NavAdmin from "./NavAdmin";
 
 export default function AdminLayout() {
   return (
-    <>
-      <div className="flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden">
-        <NavAdmin className="bg-black-100" />
+    <div className="flex bg-gray-200">
+      <NavAdmin className="bg-black-100 pointer-events-none" />
+      <div className="flex-grow w-full max-h-screen">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }

@@ -1,48 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GroceryLogos from "/img/Grocery_Logos.png";
+import axios from "axios";
 
 function LoginForm() {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
+    userType: "",
   });
-  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    const { email, password } = loginData;
-
-    const fakeUsers = [
-      {
-        email: "user@gmail.com",
-        password: "123",
-        userType: "user",
-      },
-      {
-        email: "admin@gmail.com",
-        password: "123",
-        userType: "admin",
-      },
-    ];
-
-    const user = fakeUsers.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-
-      if (user.userType === "user") {
-        window.location.href = "/user/pos";
-      } else if (user.userType === "admin") {
-        window.location.href = "/admin/report";
-      }
-    } else {
-      setError("Invalid credentials");
-    }
-  };
+  const [error, setError] = useState(""); // State for displaying login errors
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +18,30 @@ function LoginForm() {
       ...loginData,
       [name]: value,
     });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make an HTTP POST request to your API for user authentication
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        loginData
+      );
+
+      console.log("API Response:", response.data); // Log the API response
+
+      // Handle success
+      if (response.status === 200) {
+        console.log("Redirecting to /user");
+        window.location.href = "/user";
+      }
+    } catch (error) {
+      // Handle API request errors or authentication errors
+      setError("Invalid email or password. Please try again.");
+      console.error("Login Error:", error); // Log any errors
+    }
   };
 
   return (
