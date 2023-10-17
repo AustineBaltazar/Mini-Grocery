@@ -29,18 +29,32 @@ export default function Stock() {
   }
 
   function increase(productId) {
-    setStockCounts((prevStockCounts) => ({
-      ...prevStockCounts,
-      [productId]: prevStockCounts[productId] + 1,
-    }));
+    axios
+      .put(`http://localhost:3000/product/increaseStock/${productId}`)
+      .then(() => {
+        setStockCounts((prevStockCounts) => ({
+          ...prevStockCounts,
+          [productId]: prevStockCounts[productId] + 1,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error increasing stock:", error);
+      });
   }
 
   function decrease(productId) {
     if (stockCounts[productId] > 0) {
-      setStockCounts((prevStockCounts) => ({
-        ...prevStockCounts,
-        [productId]: prevStockCounts[productId] - 1,
-      }));
+      axios
+        .put(`http://localhost:3000/product/decreaseStock/${productId}`)
+        .then(() => {
+          setStockCounts((prevStockCounts) => ({
+            ...prevStockCounts,
+            [productId]: prevStockCounts[productId] - 1,
+          }));
+        })
+        .catch((error) => {
+          console.error("Error decreasing stock:", error);
+        });
     }
   }
 
@@ -67,21 +81,21 @@ export default function Stock() {
             Stock
           </h1>
         </header>
-        <div className="flex-grow flex flex-col items-center justify-center">
-          <div className=" p-2 md:p-4">
-            <div className="flex space-x-4">
+        <div className="flex-grow flex flex-col items-center ">
+          <div className="p-2 md:p-4">
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
               <input
                 type="text"
                 placeholder="Search by ID or Description"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-2 md:px-4 py-2 border border-gray-300 rounded-md shadow-md"
+                className="w-full md:w-auto px-2 md:px-4 py-2 border border-gray-300 rounded-md shadow-md"
               />
               <button
                 onClick={() => {
                   /* Add logic for searching */
                 }}
-                className="px-2 md:px-4 py-2 bg-blue-500 text-white rounded-md shadow-md"
+                className="w-full md:w-auto px-2 md:px-4 py-2 bg-blue-500 text-white rounded-md shadow-md"
               >
                 Search
               </button>
@@ -101,18 +115,20 @@ export default function Stock() {
             .map((product) => (
               <div
                 key={product._id}
-                className="w-128 h-145px flex items-center mb-4 rounded-lg border border-gray-300 bg-white shadow-md"
+                className="flex flex-col md:flex-row items-center mb-4 rounded-lg border border-gray-300 bg-white shadow-md mr-6 ml-6"
               >
                 <img
-                  src={`http://localhost:3000/${product.image}`} // Replace with the correct URL to fetch product images from your server
+                  src={`http://localhost:3000/${product.image}`}
                   alt="Product Image"
-                  className="w-32 h-32 mr-8 object-contain" // Adjust the class to fit the image size as needed
+                  className="w-32 h-32 mx-auto md:mr-8 object-contain"
                 />
-                <div className="flex-grow text-left">
+                <div className="flex-grow text-center md:text-left">
                   <table className="table-fixed w-full">
                     <thead>
                       <tr>
-                        <th className="w-1/4 font-bold">Product ID</th>
+                        <th className="w-1/4 font-bold hidden md:table-cell">
+                          Product ID
+                        </th>
                         <th className="w-1/4 font-bold">Description</th>
                         <th className="w-1/4 font-bold">Price</th>
                         <th className="w-1/4 font-bold">Stock</th>
@@ -120,15 +136,15 @@ export default function Stock() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{product._id}</td>
+                        <td className="hidden md:table-cell">{product._id}</td>
                         <td>{product.description}</td>
-                        <td>${product.price}</td>
+                        <td>₱{product.price}</td>
                         <td>{stockCounts[product._id]}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div className="flex space-x-4 mt-4 mr-4">
+                <div className="flex space-x-4 mt-4 md:mt-0">
                   <button
                     onClick={() => increase(product._id)}
                     className="px-4 py-2 bg-blue-500 text-white rounded text-xl shadow-md"
@@ -143,7 +159,7 @@ export default function Stock() {
                   </button>
                   <button
                     onClick={() => deleteProduct(product._id)}
-                    className="px-4 py-2 bg-red-500 text-white rounded text-xl"
+                    className="px-4 py-2 bg-red-500 text-white rounded text-xl mr-16"
                   >
                     Delete
                   </button>

@@ -5,8 +5,14 @@ import bags from "/img/bags.png";
 import id from "/img/ids.png";
 import graph from "/img/graph.png";
 import user from "/img/users.png"; // Import your custom icon
+import Cookies from "js-cookie";
+import SignOut from "/img/sign-out.png";
 
 export default function NavAdmin() {
+  const handleLogout = () => {
+    Cookies.remove("token");
+    window.location.href = "/login";
+  };
   return (
     <div className="bg-sky-800 w-1/7 h-screen flex flex-col">
       <div className="flex flex-col items-center justify-start p-4">
@@ -36,23 +42,19 @@ export default function NavAdmin() {
 
             <Link to="stock">Stock</Link>
           </div>
-        </div>
-      </nav>
-
-      <div className="mt-auto mb-20 text-xl text-white font-bold">
-        <nav className="flex flex-col items-center">
-          <div className="flex flex-col">
-            <div className="flex items-center mt-2">
-              <img src={setting} alt="custom icon" className="w-4 h-4 mr-2" />
-              <Link to="role">Role Permission</Link>
-            </div>
-            <div className="flex items-center mt-2">
-              <img src={setting} alt="custom icon" className="w-4 h-4 mr-2" />
-              <Link to="setting">Settings</Link>
-            </div>
+          <div className="flex items-center mt-14">
+            <button
+              onClick={handleLogout}
+              className="text-white text-lg font-semibold hover:bg-sky-700  rounded flex items-center"
+            >
+              <img src={SignOut} alt="logout icon" className="w-4 h-4 mr-2" />
+              Logout
+            </button>
           </div>
-        </nav>
-      </div>
+        </div>
+
+        {/* Empty div to push logout button to the bottom */}
+      </nav>
     </div>
   );
 }

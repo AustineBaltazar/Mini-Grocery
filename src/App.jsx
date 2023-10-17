@@ -4,6 +4,7 @@ import RegistrationForm from "./FormPage/Register";
 import LoginForm from "./FormPage/Login";
 import AdminLayout from "./AdminLayout/AdminLayout";
 import UserLayout from "./UserLayout/UserLayout";
+import ProtectedRoute from "./ProtectedRoute"; // Import the ProtectedRoute component
 import Supplier from "./AdminPage/Supplier";
 import Stock from "./AdminPage/Stock";
 import Staff from "./AdminPage/Staff";
@@ -20,8 +21,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<RegistrationForm />} />
-        <Route path="login" element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm />} />
 
+        {/* Use ProtectedRoute to secure admin and user routes */}
         <Route path="admin" element={<AdminLayout />}>
           <Route path="supplier" element={<Supplier />} />
           <Route path="staff" element={<Staff />} />

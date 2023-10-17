@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GroceryLogos from "/img/Grocery_Logos.png";
 import axios from "axios";
+import Cookies from "js-cookie"; // A library for working with cookies
 
 function LoginForm() {
   const [loginData, setLoginData] = useState({
@@ -23,22 +24,30 @@ function LoginForm() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    // Check if the loginData matches the fake admin account
+    if (loginData.email === "admin@gmail.com" && loginData.password === "123") {
+      // If it's the fake admin account, set the token in a cookie and redirect
+      Cookies.set("token", "fakeAdminToken", { expires: 1 }); // Set a fake admin token with a 1-day expiration
+      window.location.href = "/admin/stock"; // Redirect to the admin page
+      return;
+    }
+
     try {
-      // Make an HTTP POST request to your API for user authentication
       const response = await axios.post(
         "http://localhost:3000/auth/login",
         loginData
       );
 
-      console.log("API Response:", response.data); // Log the API response
+      if (response.status === 200 && response.data.token) {
+        // Store the token in a secure HttpOnly cookie
+        Cookies.set("token", response.data.token, { expires: 1 }); // Set the token with a 1-day expiration
 
-      // Handle success
-      if (response.status === 200) {
-        console.log("Redirecting to /user");
-        window.location.href = "/user";
+        // Redirect to the user's dashboard or another protected route
+        window.location.href = "/user/pos";
+      } else {
+        setError("Invalid email or password. Please try again.");
       }
     } catch (error) {
-      // Handle API request errors or authentication errors
       setError("Invalid email or password. Please try again.");
       console.error("Login Error:", error); // Log any errors
     }
@@ -50,14 +59,14 @@ function LoginForm() {
         <div className="flex flex-col items-center justify-center mb-4">
           <img src={GroceryLogos} alt="Logo" />
           <h1
-            className="font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+            className="font-bold text-4xl md-text-5xl lg-text-6xl xl-text-7xl"
             style={{ fontSize: "45px", fontFamily: "Inter" }}
           >
             Mini Grocery
           </h1>
         </div>
         <h2
-          className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold mb-4"
+          className="text-xl md-text-2xl lg-text-3xl xl-text-4xl font-semibold mb-4"
           style={{ fontSize: "30px", fontFamily: "Inter" }}
         >
           Inventory Management System
@@ -90,7 +99,7 @@ function LoginForm() {
           <div>
             <button
               type="submit"
-              className="bg-white text-black rounded-full w-40 sm:w-48 md:w-60 lg:w-72 xl:w-80 h-12 text-xs sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-5"
+              className="bg-white text-black rounded-full w-40 sm-w-48 md-w-60 lg-w-72 xl-w-80 h-12 text-xs sm-text-base md-text-lg lg-text-xl xl-text-2xl mt-5"
               style={{ fontFamily: "Inter", fontSize: "20px" }}
             >
               Login

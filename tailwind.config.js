@@ -14,6 +14,10 @@ export default {
       },
       width: {
         128: "91rem",
+        129: "95rem",
+      },
+      height: {
+        128: "45rem",
       },
     },
   },

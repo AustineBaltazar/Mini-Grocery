@@ -8,7 +8,7 @@ function RegistrationForm() {
     email: "",
     password: "",
     confirmPassword: "",
-    userType: "user",
+    staffId: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -38,6 +38,14 @@ function RegistrationForm() {
         );
 
         console.log("Registration successful:", response.data);
+
+        // Clear form fields after successful registration
+        setFormData({
+          email: "",
+          password: "",
+          confirmPassword: "",
+          staffId: "",
+        });
 
         // Redirect to the login page or show a success message as needed
       } catch (error) {
@@ -83,6 +91,18 @@ function RegistrationForm() {
           <div className="mb-4">
             <label className="block text-gray-700"></label>
             <input
+              placeholder="Staff ID"
+              style={{ fontFamily: "Inter", fontSize: "30px" }}
+              type="text"
+              name="staffId"
+              value={formData.staffId}
+              onChange={handleChange}
+              className="border rounded-md px-3 py-2 w-96 h-16 text-black"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700"></label>
+            <input
               placeholder="Email"
               style={{ fontFamily: "Inter", fontSize: "30px" }}
               type="email"
@@ -123,43 +143,7 @@ function RegistrationForm() {
               <div className="text-red-500">{errors.confirmPassword}</div>
             )}
           </div>
-          <div className="mb-4">
-            <div className="flex items-center">
-              <label className="block text-white mr-5 font-bold">
-                User Type:{" "}
-              </label>
-              <label
-                className={`mr-4 ${
-                  formData.userType === "user" ? "text-black" : ""
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="userType"
-                  value="user"
-                  checked={formData.userType === "user"}
-                  onChange={handleChange}
-                  style={{ marginRight: "4px" }}
-                />
-                User
-              </label>
-              <label
-                className={`${
-                  formData.userType === "admin" ? "text-black" : ""
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="userType"
-                  value="admin"
-                  checked={formData.userType === "admin"}
-                  onChange={handleChange}
-                  style={{ marginRight: "4px" }}
-                />
-                Admin
-              </label>
-            </div>
-          </div>
+
           <div>
             <button
               type="submit"
